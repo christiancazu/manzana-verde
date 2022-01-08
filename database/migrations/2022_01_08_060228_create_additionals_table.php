@@ -1,0 +1,40 @@
+<?php
+
+use App\Enums\Additionals;
+use App\Enums\Fields;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateAdditionalsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('additionals', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->foreignUuid('order_id', Fields::UUID)
+                ->nullable()
+                ->constrained()
+                ->onDelete('cascade');
+
+            foreach (Additionals::all() as $additionalName) {
+                $table->string($additionalName)->default(false);
+            }
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('additionals');
+    }
+}
