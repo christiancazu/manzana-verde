@@ -15,5 +15,15 @@ module.exports = {
       compositionOnly: false,
       fullInstall: true
     }
+  },
+
+  css: {
+    loaderOptions: {
+      sass: {
+        sassOptions: {
+          prependData: `@import "@/scss/variables.scss";`
+        }
+      }
+    }
   }
 }
