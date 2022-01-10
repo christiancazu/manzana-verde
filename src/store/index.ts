@@ -1,14 +1,15 @@
 import { createStore } from 'vuex'
-import { ExampleStateInterface } from './module-example/state'
 
-import example from './module-example'
+import orders from './orders'
+
+import { OrdersStateInterface } from './orders/state'
 export interface StateInterface {
   // Define your own store structure, using submodules if needed
-  example: ExampleStateInterface;
+  orders: OrdersStateInterface;
 }
 
 export default createStore<StateInterface>({
   modules: {
-    example
+    orders
   }
 })

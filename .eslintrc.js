@@ -12,6 +12,7 @@ module.exports = {
     ecmaVersion: 2020
   },
   rules: {
+    camelcase: 'off',
     semi: ['warn', 'never'],
     'space-before-function-paren': [
       'warn',

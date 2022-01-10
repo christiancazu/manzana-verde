@@ -101,7 +101,7 @@ export default defineComponent({
         display: flex;
 
         .top {
-          width: 100%;
+          width: 108%;
           height: 50%;
           border-bottom-left-radius: 100px;
           border-bottom-right-radius: 100px;

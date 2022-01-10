@@ -59,7 +59,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .navbar {
-  @apply bg-white fixed;
+  @apply bg-white fixed z-50;
   padding: 14px;
   height: 60px;
   width: 100%;

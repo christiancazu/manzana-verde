@@ -10,8 +10,8 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '',
-        name: 'Index',
-        component: () => import('../views/Index.vue')
+        name: 'MyOrders',
+        component: () => import('../views/MyOrders.vue')
       }
     ]
   }

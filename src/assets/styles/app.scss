@@ -1,8 +1,25 @@
+// $
+
 @import 'tailwind';
 @import 'variables';
 
 body {
-  color: #606060;
+  color: $text-black;
   font-family: sans-serif;
 }
 
+.bg-gray-app {
+  background-color: $gray;
+}
+
+.bg-yellow-app {
+  background-color: $yellow;
+}
+
+.bg-green-app {
+  background-color: $green;
+}
+
+.text-green {
+  color: $green;
+}

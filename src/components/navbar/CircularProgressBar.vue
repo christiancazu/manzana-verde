@@ -15,10 +15,6 @@ export default defineComponent({
       type: Number,
       default: 0
     }
-  },
-
-  setup () {
-    console.warn(0)
   }
 })
 </script>
