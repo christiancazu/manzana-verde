@@ -1,9 +1,8 @@
-// $
-
 @import 'tailwind';
 @import 'variables';
 
 body {
+  @apply font-semibold;
   color: $text-black;
   font-family: sans-serif;
   transition: all .35s;
@@ -26,5 +25,11 @@ body {
 }
 
 .page-content {
-  @apply px-3.5 pt-16 pb-16;
+  &,
+  &--alter {
+    @apply px-3.5 pt-16 pb-16;
+  }
+  &--alter {
+    padding-top: 5.5rem;
+  }
 }

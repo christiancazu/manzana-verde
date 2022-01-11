@@ -1,3 +1,9 @@
 {
-  "challenge": "Reto"
+  "low_carbo": "Bajo en carbo",
+  "low_fat": "Bajo en Grasa",
+  "low_gluten": "Bajo en gluten",
+  "low_sodium": "Bajo en sodio",
+  "no_lactose": "Sin lactosa",
+  "low_sugar": "Bajo en azúcar"
+
 }

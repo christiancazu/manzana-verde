@@ -19,8 +19,11 @@
     </template>
   </AlterNavbar>
 
-  <div class="page-content">
-    LUNCHS
+  <div class="page-content--alter">
+    <Plates
+      :plates="plates"
+      @plate:view-detail="handleViewDetailPlate"
+    />
   </div>
 </section>
 </template>
@@ -31,21 +34,22 @@ import { useRoute, useRouter } from 'vue-router'
 
 import { dataDays } from '@/data'
 import { usePlatesStore } from '@/composables'
+import { Plate } from '@/models'
 
 export default defineComponent({
   name: 'LunchsView',
 
   components: {
     AlterNavbar: defineAsyncComponent(() => import('@/components/AlterNavbar.vue')),
-    BackLink: defineAsyncComponent(() => import('@/components/BackLink.vue'))
-
+    BackLink: defineAsyncComponent(() => import('@/components/BackLink.vue')),
+    Plates: defineAsyncComponent(() => import('@/components/plates/Plates.vue'))
   },
 
   setup () {
     const route = useRoute()
     const router = useRouter()
 
-    const { dispatch_getPlates } = usePlatesStore()
+    const { plates, dispatch_getPlates } = usePlatesStore()
 
     const availableDay = dataDays.find(d => d.code_date === route.params.codeDate)
 
@@ -57,6 +61,10 @@ export default defineComponent({
       }
     }
 
+    function handleViewDetailPlate (plate: Plate) {
+      console.warn(plate)
+    }
+
     // redirect if not exists a available day
     if (!availableDay) {
       router.push({ name: 'Orders' })
@@ -65,7 +73,9 @@ export default defineComponent({
     }
 
     return {
-      availableDay
+      availableDay,
+      plates,
+      handleViewDetailPlate
     }
   }
 })
