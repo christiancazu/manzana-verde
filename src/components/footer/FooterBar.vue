@@ -27,7 +27,7 @@
         </div>
         <div class="tab tab--fab">
           <div class="top">
-            <div class="fab text-2xl">
+            <div class="fab text-2xl cursor-pointer">
               +
             </div>
           </div>

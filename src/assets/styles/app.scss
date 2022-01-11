@@ -6,6 +6,7 @@
 body {
   color: $text-black;
   font-family: sans-serif;
+  transition: all .35s;
 }
 
 .bg-gray-app {
@@ -22,4 +23,8 @@ body {
 
 .text-green {
   color: $green;
+}
+
+.page-content {
+  @apply px-3.5 pt-16 pb-16;
 }

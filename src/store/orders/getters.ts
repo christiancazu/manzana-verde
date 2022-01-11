@@ -4,11 +4,11 @@ import { OrdersStateInterface } from './state'
 
 const getters: GetterTree<OrdersStateInterface, StateInterface> = {
   getForDayTotalCal (state): number {
-    if (!state.selectedDayOrders) {
+    if (!state.selectedDayOrder || state.selectedDayOrder.details?.length === 0) {
       return 0
     }
 
-    return state.selectedDayOrders.reduce((acc, item) => {
+    return state.selectedDayOrder.details.reduce((acc, item) => {
       acc += item.plate.calories
       return acc
     }, 0)

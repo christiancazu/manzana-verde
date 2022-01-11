@@ -1,30 +1,30 @@
 <template>
 <section class="lunch-wrap">
   <template
-    v-for="order in orders"
-    :key="order.id"
+    v-for="detail in order.details"
+    :key="detail.id"
   >
     <div class="lunch-order">
       <div class="lunch-order__left">
         <img
-          :src="`${$mediaUrl}/${order.plate.image_url}`"
-          @click="handleViewPlateOpenModal(order)"
+          :src="`${$mediaUrl}/${detail.plate.image_url}`"
+          @click="handleViewPlateOpenModal(detail)"
         >
         <div>
           <div
             class="lunch-order__left--name"
-            @click="$emit('lunch:view', order)"
+            @click="$emit('lunch:view', detail)"
           >
-            {{ order.plate.name }}
+            {{ detail.plate.name }}
           </div>
           <div class="lunch-order__left--calories">
-            {{ order.plate.calories }}kcal
+            {{ detail.plate.calories }}kcal
           </div>
         </div>
       </div>
       <div
         class="lunch-order__right"
-        @click="handleConfirmDeleteOpenModal(order)"
+        @click="handleConfirmDeleteOpenModal(detail)"
       >
         <img src="@/assets/icons/delete.svg">
       </div>
@@ -51,28 +51,28 @@
 <script lang="ts">
 import { getCurrentInstance, defineAsyncComponent, defineComponent, PropType, reactive, ref } from 'vue'
 
-import { Detail } from '@/models'
+import { Detail, Order } from '@/models'
 import { useOrdersStore } from '@/composables'
 
 export default defineComponent({
   name: 'LunchOrders',
+
   components: {
     PreviewImageModal: defineAsyncComponent(() => import('@/components/PreviewImageModal.vue')),
     ConfirmDeleteModal: defineAsyncComponent(() => import('@/components/ConfirmDeleteModal.vue'))
-
   },
 
   props: {
-    orders: {
-      type: Array as PropType<Detail[]>,
-      default: () => []
+    order: {
+      type: Object as PropType<Order>,
+      default: () => null
     }
   },
 
   emits: ['lunch:view'],
 
   setup (props) {
-    const { dispatch_getOrders, dispatch_deleteOrder, SET_SELECTED_DAY_ORDERS } = useOrdersStore()
+    const { dispatch_getOrders, dispatch_deleteOrder, SET_SELECTED_DAY_ORDER } = useOrdersStore()
 
     const ctx = getCurrentInstance()
 
@@ -96,17 +96,20 @@ export default defineComponent({
     }
 
     async function handleConfirmDelete () {
-      const orderDetailToDelete = props.orders.findIndex(o => o.plate.name === plateName.value)
+      const orderDetailToDelete = props.order.details.findIndex(o => o.plate.name === plateName.value)
 
       try {
-        await dispatch_deleteOrder({ orderId: props.orders[orderDetailToDelete]!.id })
+        await dispatch_deleteOrder({ orderId: props.order.details[orderDetailToDelete]!.id })
         await dispatch_getOrders()
 
         // si es tipo almuerzo elimina todas los platos
-        if (props.orders[orderDetailToDelete]!.plate.type === 'LUNCH') {
-          SET_SELECTED_DAY_ORDERS([])
+        if (props.order.details[orderDetailToDelete]!.plate.type === 'LUNCH') {
+          SET_SELECTED_DAY_ORDER(null)
         } else {
-          SET_SELECTED_DAY_ORDERS(props.orders.filter((o, i) => i !== orderDetailToDelete))
+          SET_SELECTED_DAY_ORDER({
+            ...props.order,
+            details: props.order.details.filter((_, i) => i !== orderDetailToDelete)
+          })
         }
 
         modal.isActiveConfirmDelete = true

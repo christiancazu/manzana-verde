@@ -1,9 +1,5 @@
 <template>
-<div>
-  <h1 class="text-5xl text-center">
-    {{ $store.state.example.app }} ~ {{ $t('challenge') }}
-  </h1>
-</div>
+<RouterView />
 </template>
 
 <script lang="ts">

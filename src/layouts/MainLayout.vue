@@ -26,6 +26,7 @@
 
 <script lang="ts">
 import { defineAsyncComponent, defineComponent } from '@vue/runtime-core'
+
 import { useOrdersStore } from '@/composables'
 import { Order } from '@/models'
 
@@ -41,14 +42,10 @@ export default defineComponent({
   },
 
   setup () {
-    const { getForDayTotalCal, SET_SELECTED_DAY_ORDERS } = useOrdersStore()
+    const { getForDayTotalCal, SET_SELECTED_DAY_ORDER } = useOrdersStore()
 
     async function handleSelectDay (dayOrder: Order) {
-      if (dayOrder?.details) {
-        SET_SELECTED_DAY_ORDERS(dayOrder.details)
-      } else {
-        SET_SELECTED_DAY_ORDERS([])
-      }
+      SET_SELECTED_DAY_ORDER(dayOrder)
     }
 
     return {
@@ -58,9 +55,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="scss" scoped>
-.page-content {
-  @apply px-3.5 pt-3.5 pb-16;
-}
-</style>

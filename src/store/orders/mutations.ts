@@ -7,8 +7,12 @@ const mutation: MutationTree<OrdersStateInterface> = {
     state.orders = orders
   },
 
-  SET_SELECTED_DAY_ORDERS (state, selectedDayOrders: Detail[]) {
-    state.selectedDayOrders = selectedDayOrders
+  SET_SELECTED_DAY_ORDER (state, selectedDayOrder: Order) {
+    state.selectedDayOrder = selectedDayOrder
+
+    if (state.selectedDayOrder.details) {
+      state.selectedDayOrder.details = selectedDayOrder.details.sort((a: Detail, b: Detail) => ('' + a.plate.type).localeCompare(b.plate.type))
+    }
   }
 }
 

@@ -24,17 +24,11 @@
 </template>
 
 <script lang="ts">
-import { useOrdersStore } from '@/composables'
-import { computed, defineComponent, ref, watch } from 'vue'
+import { defineComponent, ref, watch } from 'vue'
 
-interface Day {
-  name: string
-  number: string
-  // eslint-disable-next-line camelcase
-  code_date: string
-  isActive: boolean
-  haveDetails: boolean
-}
+import { useOrdersStore } from '@/composables'
+
+import { dataDays, Day } from '@/data'
 
 export default defineComponent({
   name: 'DaysComponent',
@@ -48,26 +42,22 @@ export default defineComponent({
 
   emits: ['day:select'],
 
-  setup (props, { emit }) {
+  setup (_, { emit }) {
     const { orders } = useOrdersStore()
 
-    const valueWidth = computed<number>(() => (props.value / 2200) * 100 || 0)
-
-    const days = ref<Day[]>([
-      { name: 'Lun', number: '27', code_date: '27-01-2022', isActive: true, haveDetails: false },
-      { name: 'Mar', number: '30', code_date: '30-01-2022', isActive: false, haveDetails: false },
-      { name: 'Mie', number: '01', code_date: '01-02-2022', isActive: false, haveDetails: false },
-      { name: 'Jue', number: '02', code_date: '02-02-2022', isActive: false, haveDetails: false },
-      { name: 'Vie', number: '03', code_date: '03-02-2022', isActive: false, haveDetails: false }
-    ])
+    const days = ref<Day[]>(dataDays)
 
     function setActiveDay (day: Day) {
       days.value.forEach(d => {
         d.isActive = false
       })
+
       day.isActive = true
 
-      emit('day:select', orders.value.find(o => o.code_date === day.code_date))
+      emit('day:select', orders.value.find(o => o.code_date === day.code_date) || {
+        code_date: day.code_date,
+        details: []
+      })
     }
 
     watch(
@@ -92,8 +82,10 @@ export default defineComponent({
       }
     )
 
+    // set first day as active
+    setActiveDay(days.value[0])
+
     return {
-      valueWidth,
       days,
       setActiveDay
     }
@@ -115,7 +107,9 @@ export default defineComponent({
     border-radius: 4px;
 
     &:hover {
-      background-color: $gray;
+      border-radius: 12px;
+      background-color: $yellow;
+      color: $text-black;
     }
   }
   &__text {

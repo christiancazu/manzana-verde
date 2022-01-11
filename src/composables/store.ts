@@ -1,4 +1,4 @@
-import { Detail, Order } from '@/models'
+import { Detail, Order, Plate } from '@/models'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 
@@ -7,7 +7,7 @@ export const useOrdersStore = () => {
 
   return {
     orders: computed<Order[]>(() => state.orders.orders),
-    selectedDayOrders: computed<Detail[]>(() => state.orders.selectedDayOrders),
+    selectedDayOrder: computed<Order>(() => state.orders.selectedDayOrder),
 
     getForDayTotalCal: computed<number>(() => getters['orders/getForDayTotalCal']),
 
@@ -15,6 +15,16 @@ export const useOrdersStore = () => {
     dispatch_getByCodeDateOrder: (code_date: string) => dispatch('orders/dispatch_getByCodeDateOrder', { code_date }),
     dispatch_deleteOrder: ({ orderId }: {orderId: string}) => dispatch('orders/dispatch_deleteOrder', { orderId }),
 
-    SET_SELECTED_DAY_ORDERS: (selectedDayOrders: Detail[]) => commit('orders/SET_SELECTED_DAY_ORDERS', selectedDayOrders)
+    SET_SELECTED_DAY_ORDER: (selectedDayOrder: Order|null) => commit('orders/SET_SELECTED_DAY_ORDER', selectedDayOrder)
+  }
+}
+
+export const usePlatesStore = () => {
+  const { state, getters, dispatch, commit } = useStore()
+
+  return {
+    plates: computed<Plate[]>(() => state.plates.plates),
+
+    dispatch_getPlates: ({ type }: {type: string}) => dispatch('plates/dispatch_getPlates', { type })
   }
 }

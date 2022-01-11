@@ -1,14 +1,14 @@
-import { Detail, Order } from '@/models'
+import { Order } from '@/models'
 
 export interface OrdersStateInterface {
   orders: Order[];
-  selectedDayOrders: Detail[]
+  selectedDayOrder: Order|null
 }
 
 function state (): OrdersStateInterface {
   return {
     orders: [],
-    selectedDayOrders: []
+    selectedDayOrder: null
   }
 }
 

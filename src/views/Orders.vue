@@ -6,9 +6,9 @@
     label="Media mañana"
   />
   <LunchOrders
-    v-if="selectedDayOrders.length"
+    v-if="selectedDayOrder?.details.length"
     class="mb-4"
-    :orders="selectedDayOrders"
+    :order="selectedDayOrder"
   />
   <EmptyOrder
     v-else
@@ -34,11 +34,12 @@
 
 <script lang="ts">
 import { defineAsyncComponent, defineComponent } from 'vue'
+import { useRouter } from 'vue-router'
 
 import { useOrdersStore } from '@/composables'
 
 export default defineComponent({
-  name: 'MyOrders',
+  name: 'OrdersView',
 
   components: {
     EmptyOrder: defineAsyncComponent(() => import('@/components/orders/EmptyOrder.vue')),
@@ -46,10 +47,12 @@ export default defineComponent({
   },
 
   setup () {
-    const { selectedDayOrders, dispatch_getOrders } = useOrdersStore()
+    const router = useRouter()
+
+    const { selectedDayOrder, dispatch_getOrders } = useOrdersStore()
 
     function handleAddOrder () {
-      //
+      router.push({ name: 'Lunchs', params: { codeDate: selectedDayOrder.value.code_date } })
     }
 
     async function init () {
@@ -64,7 +67,7 @@ export default defineComponent({
 
     return {
       handleAddOrder,
-      selectedDayOrders
+      selectedDayOrder
     }
   }
 })
