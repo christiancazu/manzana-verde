@@ -12,8 +12,14 @@ class PlateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $requestType = $request->get('type');
+
+        if ($requestType) {
+            return Plate::with('extras')->where('type', $requestType)->get();
+        }
+
         return Plate::with('extras')->get();
     }
 

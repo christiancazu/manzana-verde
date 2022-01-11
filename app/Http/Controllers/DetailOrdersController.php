@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\Plates;
 use App\Models\DetailOrder;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class DetailOrdersController extends Controller
@@ -85,7 +86,9 @@ class DetailOrdersController extends Controller
 
         // si el plato es tipo almuerzo elimina todos los detalles de orden
         if ($detailOrder->plate->type === Plates::LUNCH) {
-            return DetailOrder::where('order_id', $detailOrder->order_id)->delete();
+            DetailOrder::where('order_id', $detailOrder->order_id)->delete();
+
+            return Order::find($detailOrder->order_id)->delete();
         }
 
         return $detailOrder->delete();
