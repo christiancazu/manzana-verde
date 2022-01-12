@@ -18,6 +18,10 @@ const actions: ActionTree<PlatesStateInterface, StateInterface> = {
     } catch (error) {
       return Promise.reject(error)
     }
+  },
+
+  dispatch_getPlate (_, { plateId } : { plateId: string }) {
+    return axiosInstance.get(`plates/${plateId}`)
   }
 }
 

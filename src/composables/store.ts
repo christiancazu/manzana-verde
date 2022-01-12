@@ -1,4 +1,4 @@
-import { Detail, Order, Plate } from '@/models'
+import { Order, Plate } from '@/models'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 
@@ -20,11 +20,12 @@ export const useOrdersStore = () => {
 }
 
 export const usePlatesStore = () => {
-  const { state, getters, dispatch, commit } = useStore()
+  const { state, dispatch } = useStore()
 
   return {
     plates: computed<Plate[]>(() => state.plates.plates),
 
+    dispatch_getPlate: ({ plateId }: {plateId: string}) => dispatch('plates/dispatch_getPlate', { plateId }),
     dispatch_getPlates: ({ type }: {type: string}) => dispatch('plates/dispatch_getPlates', { type })
   }
 }

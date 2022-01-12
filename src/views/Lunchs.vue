@@ -1,7 +1,10 @@
 <template>
 <section>
   <AlterNavbar>
-    <template #header>
+    <template
+      v-if="availableDay"
+      #header
+    >
       <div class="alter-navbar__left">
         <BackLink :to-route="{name: 'Orders'}" />
       </div>
@@ -62,7 +65,15 @@ export default defineComponent({
     }
 
     function handleViewDetailPlate (plate: Plate) {
-      console.warn(plate)
+      router.push({
+        name: 'LunchDetail',
+        params: {
+          plateId: plate.id
+        },
+        query: {
+          codeDate: availableDay!.code_date
+        }
+      })
     }
 
     // redirect if not exists a available day
@@ -80,21 +91,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="scss">
-.alter-navbar {
-  & > {
-    @apply text-sm;
-  }
-  &__center {
-    @apply font-semibold text-xl;
-  }
-  &__right {
-    @apply flex flex-col text-center;
-
-    &--day-number {
-      @apply font-semibold text-xl;
-    }
-  }
-}
-</style>

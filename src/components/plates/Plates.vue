@@ -96,7 +96,7 @@ export default defineComponent({
   border: 1px solid $gray;
 
   &__img {
-    @apply w-full object-cover rounded-t-xl;
+    @apply w-full object-cover rounded-t-xl cursor-pointer;
     max-height: 180px;
   }
 
@@ -108,7 +108,7 @@ export default defineComponent({
   }
 
   &__info {
-    @apply p-4 font-semibold;
+    @apply p-4 font-semibold cursor-pointer;
 
     &--top,
     &--bottom {

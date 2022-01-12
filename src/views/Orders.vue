@@ -52,7 +52,12 @@ export default defineComponent({
     const { selectedDayOrder, dispatch_getOrders } = useOrdersStore()
 
     function handleAddOrder () {
-      router.push({ name: 'Lunchs', params: { codeDate: selectedDayOrder.value.code_date } })
+      router.push({
+        name: 'Lunchs',
+        params: {
+          codeDate: selectedDayOrder.value.code_date
+        }
+      })
     }
 
     async function init () {

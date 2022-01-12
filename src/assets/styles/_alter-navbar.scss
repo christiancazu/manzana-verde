@@ -1,0 +1,15 @@
+.alter-navbar {
+  & > {
+    @apply text-sm;
+  }
+  &__center {
+    @apply font-semibold text-xl;
+  }
+  &__right {
+    @apply flex flex-col text-center;
+
+    &--day-number {
+      @apply font-semibold text-xl;
+    }
+  }
+}

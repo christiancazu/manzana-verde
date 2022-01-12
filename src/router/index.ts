@@ -24,11 +24,11 @@ const routes: Array<RouteRecordRaw> = [
         path: 'lunchs',
         component: () => import('../layouts/AlterLayout.vue'),
         children: [
-          // {
-          //   path: '',
-          //   name: 'ListLunchs',
-          //   component: () => import('../views/ListLunchs.vue')
-          // },
+          {
+            path: 'details/:plateId',
+            name: 'LunchDetail',
+            component: () => import('../views/LunchDetail.vue')
+          },
           {
             path: ':codeDate',
             name: 'Lunchs',
