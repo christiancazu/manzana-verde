@@ -80,6 +80,7 @@ export default defineComponent({
       isActivePreviewImage: false,
       isActiveConfirmDelete: false
     })
+
     const imgUrl = ref<string>('')
     const plateName = ref<string>('')
     const isLunch = ref<boolean>(false)
@@ -104,7 +105,10 @@ export default defineComponent({
 
         // si es tipo almuerzo elimina todas los platos
         if (props.order.details[orderDetailToDelete]!.plate.type === 'LUNCH') {
-          SET_SELECTED_DAY_ORDER(null)
+          SET_SELECTED_DAY_ORDER({
+            ...props.order,
+            details: []
+          })
         } else {
           SET_SELECTED_DAY_ORDER({
             ...props.order,
@@ -121,6 +125,7 @@ export default defineComponent({
           message: 'La orden ha sido eliminada con éxito'
         })
       } catch (error) {
+        console.warn(error)
         ctx?.appContext.config.globalProperties.$toast.open({
           message: 'No se pudo eliminar la orden',
           type: 'error'

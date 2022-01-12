@@ -5,10 +5,11 @@ export interface Plate {
   description: string
   image_url: string
   calories: number
-  fats: number,
+  fats: number
   carbohydrates: number
   proteines: number
   benefits: string
   is_favorite: boolean
   is_recommended: boolean
+  extras: this[]
 }

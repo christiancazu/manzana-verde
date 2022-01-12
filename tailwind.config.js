@@ -1,3 +1,4 @@
+const { plugin } = require('postcss')
 const colors = require('tailwindcss/colors')
 
 module.exports = {

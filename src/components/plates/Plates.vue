@@ -33,7 +33,10 @@
         <div>
           {{ plate.calories }}Kcal
         </div>
-        <Benefits :benefits="plate.benefits" />
+        <Benefits
+          :benefits="plate.benefits"
+          only-icons
+        />
       </div>
     </div>
   </div>

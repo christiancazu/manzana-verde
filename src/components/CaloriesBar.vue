@@ -5,7 +5,7 @@
       {{ value }}Kcal
     </div>
     <div>
-      2200Kcal
+      22000Kcal
     </div>
   </div>
   <div class="w-full bg-gray-app rounded-full h-1.5">
@@ -31,7 +31,7 @@ export default defineComponent({
   },
 
   setup (props) {
-    const valueWidth = computed<number>(() => (props.value / 2200) * 100 || 0)
+    const valueWidth = computed<number>(() => (props.value / 22000) * 100 || 0)
 
     return {
       valueWidth

@@ -4,6 +4,10 @@
   "low_gluten": "Bajo en gluten",
   "low_sodium": "Bajo en sodio",
   "no_lactose": "Sin lactosa",
-  "low_sugar": "Bajo en azúcar"
+  "low_sugar": "Bajo en azúcar",
 
+  "include_sweet_potato": "Camote",
+  "include_potato": "Papa",
+  "include_rice": "Arroz",
+  "include_spicy": "Incluir picante"
 }

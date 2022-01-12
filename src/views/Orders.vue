@@ -37,6 +37,7 @@ import { defineAsyncComponent, defineComponent } from 'vue'
 import { useRouter } from 'vue-router'
 
 import { useOrdersStore } from '@/composables'
+import { Order } from '@/models'
 
 export default defineComponent({
   name: 'OrdersView',
@@ -49,7 +50,7 @@ export default defineComponent({
   setup () {
     const router = useRouter()
 
-    const { selectedDayOrder, dispatch_getOrders } = useOrdersStore()
+    const { selectedDayOrder, dispatch_getOrders, SET_SELECTED_DAY_ORDER } = useOrdersStore()
 
     function handleAddOrder () {
       router.push({
@@ -62,9 +63,13 @@ export default defineComponent({
 
     async function init () {
       try {
-        await dispatch_getOrders()
-      } catch (error) {
+        const orders: Order[] = await dispatch_getOrders()
 
+        if (orders.length) {
+          SET_SELECTED_DAY_ORDER(orders.find(o => o.code_date) || null)
+        }
+      } catch (error) {
+        console.error(error)
       }
     }
 

@@ -22,6 +22,10 @@ const actions: ActionTree<PlatesStateInterface, StateInterface> = {
 
   dispatch_getPlate (_, { plateId } : { plateId: string }) {
     return axiosInstance.get(`plates/${plateId}`)
+  },
+
+  dispatch_updateFavoritePlate (_, { plateId, is_favorite }: {plateId: string, is_favorite: boolean}) {
+    return axiosInstance.put(`plates/${plateId}`, { is_favorite })
   }
 }
 

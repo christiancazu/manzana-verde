@@ -33,3 +33,10 @@ body {
     padding-top: 5.5rem;
   }
 }
+
+@layer utilities {
+  .img-detail {
+    @apply w-full object-cover rounded-t-xl cursor-pointer;
+    max-height: 180px;
+  }
+}
