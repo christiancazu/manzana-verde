@@ -16,6 +16,8 @@ class CreateDetailOrdersTable extends Migration
     public function up()
     {
         Schema::create('detail_orders', function (Blueprint $table) {
+            \Illuminate\Support\Facades\DB::statement('SET SESSION sql_require_primary_key=0');
+
             $table->uuid('id')->primary();
             $table->enum('type', Plates::all());
             $table->foreignUuid('order_id', Fields::UUID)

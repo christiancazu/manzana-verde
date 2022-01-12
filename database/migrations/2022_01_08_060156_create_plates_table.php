@@ -15,6 +15,8 @@ class CreatePlatesTable extends Migration
     public function up()
     {
         Schema::create('plates', function (Blueprint $table) {
+            \Illuminate\Support\Facades\DB::statement('SET SESSION sql_require_primary_key=0');
+
             $table->uuid('id')->primary();
             $table->string('name')->unique();
             $table->enum('type', Plates::all());

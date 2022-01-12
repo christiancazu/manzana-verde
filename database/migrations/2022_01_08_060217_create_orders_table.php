@@ -15,6 +15,8 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
+            \Illuminate\Support\Facades\DB::statement('SET SESSION sql_require_primary_key=0');
+
             $table->uuid('id')->primary();
             $table->string('code_date', Fields::CODE_DATE)->unique();
             $table->timestamps();

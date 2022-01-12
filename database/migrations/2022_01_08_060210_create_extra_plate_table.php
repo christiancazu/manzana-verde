@@ -15,6 +15,8 @@ class CreateExtraPlateTable extends Migration
     public function up()
     {
         Schema::create('extra_plate', function (Blueprint $table) {
+            \Illuminate\Support\Facades\DB::statement('SET SESSION sql_require_primary_key=0');
+
             $table->foreignUuid('plate_id', Fields::UUID)
                 ->nullable()
                 ->constrained()

@@ -52,7 +52,7 @@ class PlateController extends Controller
      */
     public function show($id)
     {
-        //
+        return Plate::with('extras')->findOrFail($id);
     }
 
     /**
